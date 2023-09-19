@@ -4,9 +4,9 @@ export default function StudentInfo()
 {
     return(
         <div>
-            <p>Name:Gurmaher</p>
+            <p>Name:Gurmaher Pal Singh</p>
             <p>Course section: CPRG 306 A</p>
-            <Link href="https://github.com/">https://github.com/</Link>
+            <Link href="https://github.com/">GitHub Link Here</Link>
         </div>
     )
 }
