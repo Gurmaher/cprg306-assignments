@@ -1,10 +1,17 @@
-import Link from "next/link"
-export default function Week_3()
-{
-    return(
-        <div>
-            <h1>Week 3</h1>
-            <Link href="\week3\item.js">Items</Link>
-        </div>
-    )
-}
+import React from "react";
+import Link from "next/link";
+import ItemList from "./item-list";
+ // Import Link from Next.js
+
+const page = () => {
+  return (
+    <main className="">
+      <h1 className="text-2xl font-semibold">Shopping List</h1>
+      <ItemList />
+    </main>
+  );
+};
+
+export default page;
+
+
