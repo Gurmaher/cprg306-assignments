@@ -1,102 +1,80 @@
-import React, { useState } from "react";
+"use client";
 
-export default function NewItem({ onAddItem }) { // Added the onAddItem prop
-  const [itemName, setItemName] = useState("");
-  const [itemQuantity, setItemQuantity] = useState(1);
-  const [itemCategory, setItemCategory] = useState("produce");
+import { useState } from "react";
 
-  const handleFormSubmit = (event) => {
+export default function NewItem({ onAddItem}) {
+  const [name, setName] = useState("");
+  const [quantity, setQuantity] = useState(1);
+  const [category, setCategory] = useState("produce");
+
+  const handleSubmit = (event) => {
     event.preventDefault();
-
-    const formData = {
-      name: itemName,
-      quantity: itemQuantity,
-      category: itemCategory,
+    const item = {
+      name,
+      quantity,
+      category,
     };
-
-    // Replace the alert functionality by calling the onAddItem prop
-    if (onAddItem) {
-      onAddItem(formData);
-    }
-
-    // Reset form fields to initial state
-    setItemName("");
-    setItemQuantity(1);
-    setItemCategory("produce");
+    onAddItem(item);
+    console.log(item);
+    setName("");
+    setQuantity(1);
+    setCategory("produce");
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <h1 className="text-4xl font-bold absolute top-0 mt-10">Add Items</h1>
+      <h1 className="text-4xl font-bold absolute top-0 mt-10">Add-Items</h1>
       <div className="bg-slate-600 w-full max-w-md p-10 rounded-xl hover:bg-slate-700">
-        <form onSubmit={handleFormSubmit}>
-          <div className="mb-4">
-            <label className="block text-lg mb-2" htmlFor="itemName">
-              Item Name
-            </label>
+        <form onSubmit={handleSubmit}>
+          <label className="block mb-5">
             <input
-              type="text"
-              id="itemName"
-              value={itemName}
-              onChange={(event) => setItemName(event.target.value)}
-              placeholder="Enter item name"
+              onChange={(event) => {
+                setName(event.target.value);
+              }}
+              value={name}
+              placeholder="Item Name" required
+              className="mt-1 p-3 block w-full rounded-md text-black bg-gray-200 border-transparent text-center text-md  focus:bg-white focus:ring-0 hover:scale-105 duration-75 "
+            ></input>
+          </label>
+          <label className="block mb-5">
+            <input
               required
-              className="input-field"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-lg mb-2" htmlFor="itemQuantity">
-              Quantity
-            </label>
-            <input
+              onChange={(event) => {
+                setQuantity(Number(event.target.value));
+              }}
+              value={quantity}
               type="number"
-              id="itemQuantity"
               min="1"
               max="99"
-              value={itemQuantity}
-              onChange={(event) =>
-                setItemQuantity(Number(event.target.value))
-              }
-              placeholder="Enter quantity"
-              required
-              className="input-field"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-lg mb-2" htmlFor="itemCategory">
-              Category
-            </label>
+              className="mt-1 p-3 block w-full rounded-md text-black bg-gray-200 border-transparent text-center text-md  focus:bg-white focus:ring-0 hover:scale-105 duration-75"
+            ></input>
+          </label>
+          <label className="block mb-5">
             <select
-              id="itemCategory"
-              value={itemCategory}
-              onChange={(event) => setItemCategory(event.target.value)}
               required
-              className="input-field"
+              onChange={(event) => {
+                setCategory(event.target.value);
+              }}
+              value={category}
+              className="mt-1 p-3 block w-full rounded-md text-black bg-gray-200 border-transparent text-center text-md  focus:bg-white focus:ring-0 hover:scale-105 duration-75"
             >
+              <option value="Category" disabled>Category</option>
               <option value="produce">Produce</option>
               <option value="dairy">Dairy</option>
               <option value="bakery">Bakery</option>
               <option value="meat">Meat</option>
+              <option value="frozen foods">Frozen Foods</option>
               <option value="canned goods">Canned Goods</option>
               <option value="dry goods">Dry Goods</option>
-              <option value="household">Household</option>
               <option value="beverages">Beverages</option>
               <option value="snacks">Snacks</option>
+              <option value="household">Household</option>
               <option value="other">Other</option>
             </select>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full py-2 px-4 bg-yellow-600 hover:bg-green-700 rounded-md text-white font-bold text-lg"
-          >
-            Add
-          </button>
+          </label>
+          <button type="submit" className="w-full py-2 px-4 bg-yellow-600 hover:bg-green-700 rounded-md text-black">+</button>
         </form>
       </div>
     </div>
   );
 }
-

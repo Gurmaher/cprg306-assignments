@@ -1,13 +1,10 @@
-import React from "react"
-const { list } = require("postcss")
-
-const Item = ({ name, quantity, category}) => {
-    return (
-        <li className="bg-white shadow-md p-4 rounded-lg mb-4">
-        <div className="text-xl font-semibold">Name: {name}</div>
-        <div className="text-gray-500">Category: {category}</div>
-        <div className="text-gray-500">Quantity: {quantity}</div>
-        </li>
-    )
+export default function Item({name,quantity,category}){
+    return(
+        <div className=" bg-gray-500 w-full max-w-xs m-4 p-2 rounded hover:scale-105 duration-75">
+            <li className="list-none">
+                <p className="font-semibold text-lg text-yellow-400">{name}</p>
+                <p>Buy {quantity} in {category}</p>
+            </li>
+        </div>
+    );
 }
-export default Item;
